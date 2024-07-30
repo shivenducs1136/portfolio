@@ -31,6 +31,8 @@ jobs:
           echo "user.password=$env:SUPER_SECRET" >> src/main/resources/application.properties
     - name: Maven clean install
       run: mvn clean install
+    - shell: bash
+      run: echo "${ls target}"
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build --no-cache . --file Dockerfile --tag my-image-name:$(date +%s)
