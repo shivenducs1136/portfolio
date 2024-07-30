@@ -22,12 +22,12 @@ jobs:
     - shell: bash
       env:
         SUPER_SECRET: ${{ secrets.EMAIL }}
-        run: |
+      run: |
           echo "user.email=$env:SUPER_SECRET" >> src/main/resources/application.properties
     - shell: bash
       env:
         SUPER_SECRET: ${{ secrets.PASSWORD }}
-        run: |
+      run: |
           echo "user.password=$env:SUPER_SECRET" >> src/main/resources/application.properties
     - name: Maven clean install
       run: mvn clean install
