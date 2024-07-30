@@ -31,8 +31,5 @@ jobs:
           echo "user.password=$env:SUPER_SECRET" >> src/main/resources/application.properties
     - name: Maven clean install 
       run: mvn clean install >> mvn.txt
-    - uses: actions/checkout@v4
-    - shell: bash
-      run: echo $(ls)
     - name: Build the Docker image
       run: docker build -t portfolio:$(date +%s) -f Dockerfile .
