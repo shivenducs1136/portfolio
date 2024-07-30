@@ -19,6 +19,16 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+    - shell: bash
+      env:
+        SUPER_SECRET: ${{ secrets.EMAIL }}
+        run: |
+          echo "user.email=$env:SUPER_SECRET" >> src/main/resources/application.properties
+    - shell: bash
+      env:
+        SUPER_SECRET: ${{ secrets.PASSWORD }}
+        run: |
+          echo "user.password=$env:SUPER_SECRET" >> src/main/resources/application.properties
     - name: Maven clean install
       run: mvn clean install
     - uses: actions/checkout@v4
