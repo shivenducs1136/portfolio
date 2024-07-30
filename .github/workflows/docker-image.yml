@@ -29,10 +29,10 @@ jobs:
         SUPER_SECRET: ${{ secrets.PASSWORD }}
       run: |
           echo "user.password=$env:SUPER_SECRET" >> src/main/resources/application.properties
-    - name: Maven clean install
-      run: mvn clean install
+    - name: Maven clean install 
+      run: mvn clean install >> mvn.txt
     - shell: bash
-      run: echo "${ls target}"
+      run: echo $(ls target)
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build --no-cache . --file Dockerfile --tag my-image-name:$(date +%s)
