@@ -38,5 +38,9 @@ jobs:
       with:
         username: bitwisor07
         password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: Push to Docker
-      run: docker push bitwisor07/portfolio:latest
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tags: user/app:latest
