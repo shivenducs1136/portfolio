@@ -2,13 +2,11 @@ package com.bitwisor.portfolio.controller;
 
 import com.bitwisor.portfolio.model.MessageModel;
 import com.bitwisor.portfolio.service.EmailService;
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
