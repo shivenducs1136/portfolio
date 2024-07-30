@@ -62,6 +62,10 @@
         button:hover {
             background-color: #333;
         }
+        #loading {
+            display: none;
+            margin: 20px auto;
+        }
     </style>
     <script type="text/javascript">
         async function sendEmail() {
@@ -80,6 +84,8 @@
                 alert('Message already sent.');
                 return;
             }
+            // Show loading GIF
+            document.getElementById('loading').style.display = 'block';
 
             var data = {
                 email: email,
@@ -88,7 +94,7 @@
 
             };
             try {
-                let response = await fetch('http://localhost:8080/message', {
+                let response = await fetch('http://13.51.178.118:80/message', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -98,8 +104,10 @@
                 if (response.ok) {
                     // Store the content in localStorage
                     localStorage.setItem('lastSentContent', content);
+                    document.getElementById('loading').style.display = 'none';
                     alert('Email content sent successfully!');
                 } else {
+                    document.getElementById('loading').style.display = 'none';
                     alert('Failed to send email content.');
                 }
             } catch (error) {
@@ -223,7 +231,7 @@
     <input type="email" id="userEmail" placeholder="Enter your email here..." required><br>
     <textarea id="emailContent" rows="10" cols="30" placeholder="Enter your content here..." required></textarea><br>
     <button onclick="sendEmail()">Send Email Content</button>
-    <br>
+    <img id="loading" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDBnYnkzcWNvY2JveWJ1eDNpeGxlM2htajAwYTl3cHFtNDVvNTJhdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eLoA4yVFJ6L8OR4Gn5/giphy.webp" alt="Loading...">   <br>
     <hr>
     <br>
 
