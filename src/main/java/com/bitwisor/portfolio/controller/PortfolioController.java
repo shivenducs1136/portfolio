@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.InvalidParameterException;
+
 @RestController
 public class PortfolioController {
 
@@ -17,11 +19,17 @@ public class PortfolioController {
 
     @PostMapping("/message")
     public ResponseEntity<String> newMessage(@RequestBody MessageModel msgModel) {
-        if( emailService.sendEmail(msgModel.getEmail(),msgModel.getSubject(), msgModel.getContent())){
-            return new ResponseEntity<>("Email sent", HttpStatus.OK);
+        try{
+            boolean b  =emailService.sendEmail(msgModel.getEmail(),msgModel.getSubject(), msgModel.getContent());
+            if( b ){
+                return new ResponseEntity<>("Email sent", HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>("Email sending failed", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
-        else{
-            return new ResponseEntity<>("Email sending failed", HttpStatus.BAD_REQUEST);
+        catch (InvalidParameterException e){
+            return new ResponseEntity<>("Email provided is not found!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

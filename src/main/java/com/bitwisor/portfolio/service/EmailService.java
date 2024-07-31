@@ -7,6 +7,7 @@ import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.security.InvalidParameterException;
 import java.util.Properties;
 
 @Service
@@ -46,9 +47,23 @@ public class EmailService {
 
             Transport.send(message);
 
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(email));
+            msg.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse(to)
+            );
+            msg.setSubject("Your email successfully sent! ");
+            msg.setText("Hi \n\n " +
+                    "Thank you for making an effort to reach me out! " +
+                    "\n\nThis is a confirmation email that your mail has been sent successfully!\n" +
+                    "I'll be reaching out you soon. \n\n Regards,\nShivendu Mishra");
+
+            Transport.send(msg);
             System.out.println("Done");
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println(e.getMessage());
            return false;
         }
