@@ -52,7 +52,7 @@ jobs:
     - name: Set permissions for SSH key
       run: chmod 600 kp.pem
     - name: SSH into EC2 and run multiple commands
-    - run: |
+      run: |
         ssh -o StrictHostKeyChecking=no -i kp.pem ec2-user@13.51.178.118 << 'EOF'
           sudo docker stop portfoliocontainer
           sudo docker rm portfoliocontainer
