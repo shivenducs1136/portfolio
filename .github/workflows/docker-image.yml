@@ -50,7 +50,7 @@ jobs:
       run: |
           echo "$SUPER_SECRET" >> kp.pem
     - name: Login to Linux
-      run: ssh -i kp.pem ec2-user@13.51.178.118
+      run: ssh -i kp.pem -tt ec2-user@13.51.178.118
     - name: Stop current Container update
       run: sudo docker stop portfoliocontainer
     - name: Delete stopped container
