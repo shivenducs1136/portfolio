@@ -88,7 +88,11 @@
                 alert('Please enter a valid email address.');
                 return;
             }
-
+            // Content validation
+            if (content=="") {
+                alert('Please enter some content.');
+                return;
+            }
             // Check if the content was already sent
             if (localStorage.getItem('lastSentContent') === content) {
                 alert('Message already sent.');
@@ -115,6 +119,8 @@
                     alert('Email content sent successfully!');
                     // Hide loading GIF
                     document.getElementById('loading').style.display = 'none';
+                    document.getElementById('userEmail').value = "";
+                    document.getElementById('emailContent').value = "";
                 } else {
                     alert('Failed to send email content.');
                     // Hide loading GIF
@@ -252,7 +258,7 @@
     <input type="email" id="userEmail" placeholder="Enter your email here..." required><br>
     <textarea id="emailContent" rows="10" cols="30" placeholder="Enter your content here..." required></textarea><br>
     <img id="loading" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDBnYnkzcWNvY2JveWJ1eDNpeGxlM2htajAwYTl3cHFtNDVvNTJhdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eLoA4yVFJ6L8OR4Gn5/giphy.webp" alt="Loading...">   <br>
-    <button onclick="sendEmail()">Send Email Content</button>
+    <button onclick="sendEmail()">Send Email</button>
     <br>
     <hr>
     <br>
