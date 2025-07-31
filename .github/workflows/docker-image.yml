@@ -53,7 +53,7 @@ jobs:
       run: chmod 600 kp.pem
     - name: SSH into EC2 and run multiple commands
       run: |
-        ssh -o StrictHostKeyChecking=no -i kp.pem ec2-user@13.51.178.118 << 'EOF'
+        ssh -o StrictHostKeyChecking=no -i kp.pem ec2-user@3.108.234.158 << 'EOF'
           sudo docker stop portfoliocontainer
           sudo docker rm portfoliocontainer
           sudo docker login --username bitwisor07 --password ${{ secrets.PASSWORD }}
